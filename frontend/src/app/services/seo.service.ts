@@ -9,7 +9,7 @@ import { StateService } from './state.service';
 })
 export class SeoService {
   network = '';
-  baseTitle = 'mempool';
+  baseTitle = 'lightning.space';
   baseDescription = 'Explore the full Bitcoin ecosystem with The Mempool Open Project™.';
 
   constructor(
