@@ -41,6 +41,6 @@ jobs:
         server: ${{ secrets.DEV_FTP_SERVER }}
         port: ${{ secrets.DEV_FTP_PORT }}
         local_path: './frontend/dist/mempool'
-        remote_path: '/www/html/mempool'
+        remote_path: '/www/html'
         delete_remote_files: true
         sftpArgs: '-o ConnectTimeout=5'
