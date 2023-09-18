@@ -1,0 +1,47 @@
+name: Deploy to Explorer VM (production)
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy to Explorer VM
+    runs-on: 'ubuntu-latest'
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install packages
+      run: |
+        npm ci
+
+    - name: Build code
+      run: |
+        npm run build
+
+    - name: Deploy
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        username: ${{ secrets.PRD_FTP_USERNAME }}
+        password: ${{ secrets.PRD_FTP_PASSWORD }}
+        ssh_private_key: ''
+        server: ${{ secrets.PRD_FTP_SERVER }}
+        port: ${{ secrets.PRD_FTP_PORT }}
+        local_path: './frontend/dist/mempool/browser'
+        remote_path: '/www/html/mempool'
+        delete_remote_files: true
+        sftpArgs: '-o ConnectTimeout=5'

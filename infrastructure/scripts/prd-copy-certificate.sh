@@ -2,7 +2,7 @@
 
 sudo chown -R lds:lds /home/lds/volumes
 
-sourcedir=/home/lds/volumes/certbot/etc/live/vm-lds-exp-dev.westeurope.cloudapp.azure.com
+sourcedir=/home/lds/volumes/certbot/etc/live/explorer.lightning.space
 targetdir=/home/lds/volumes/nginx/ssl
 
 cp ${sourcedir}/fullchain.pem ${targetdir}

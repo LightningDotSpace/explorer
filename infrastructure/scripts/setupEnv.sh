@@ -7,5 +7,6 @@ cd ~/volumes
 mkdir certbot
 
 mkdir nginx
-mkdir -p nginx/ssl/live/vm-lds-exp-dev.westeurope.cloudapp.azure
+mkdir nginx/site-content
+mkdir nginx/ssl
 
