@@ -58,7 +58,7 @@ src/resources/**/*.mp4
 src/resources/**/*.vtt
 
 # environment config
-mempool-frontend-config.json
+#mempool-frontend-config.json
 generated-config.js
 
 # e2e results
