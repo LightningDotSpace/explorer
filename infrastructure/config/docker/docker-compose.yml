@@ -1,0 +1,31 @@
+version: '3.7'
+name: 'lightning-explorer'
+
+services:
+  webserver:
+    image: nginx:1.25.1-perl
+    restart: unless-stopped
+    volumes:
+      - ./volumes/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./volumes/nginx/nginx-mempool.conf:/etc/nginx/nginx-mempool.conf
+      - ./volumes/nginx/ssl:/etc/nginx/ssl
+      - ./volumes/nginx/site-content:/etc/nginx/html
+    ports:
+      - '80:80'
+      - '443:443'
+
+  openssh-server:
+    image: linuxserver/openssh-server:version-9.3_p2-r0
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - SUDO_ACCESS=false
+      - PASSWORD_ACCESS=true
+      - USER_PASSWORD=[PASSWORD]
+      - USER_NAME=[USER]
+    volumes:
+      - ./volumes/nginx/site-content:/www/html
+    ports:
+      - 4422:2222
